@@ -292,17 +292,20 @@ namespace TFS.Controladores
                         if (item.Conflitos > 0)
                         {
                             if (VerificaConflitos(item) > 0)
+                            {
                                 return new Tuple<string, Exception>(item.Mensagem, null);
-                            else
-                                item.Conflitos = 0;
+                            }
                         }
                         else
                         {
-                            RealizaMerge(item);
+                            RealizaMerge(item);                            
                             if (VerificaConflitos(item) > 0)
+                            {
+
                                 return new Tuple<string, Exception>(item.Mensagem, null);
-                            item.Finalizado = true;
+                            }                            
                         }
+                        item.Finalizado = true;
                         Checkin(item.Mensagem);
                         return new Tuple<string, Exception>("", null);
                     }
@@ -334,7 +337,7 @@ namespace TFS.Controladores
 
         private void RealizaMerge(Merge merge)
         {
-            string arguments = @"merge /version:C" + merge.IdChangeSetInicio.ToString() + "~" + merge.IdChangeSetInicio.ToString() + " ";
+            string arguments = @"merge /version:C" + merge.IdChangeSetInicio.ToString() + "~" + merge.IdChangeSetFim.ToString() + " ";
             arguments += BranchOrigem + " ";
             arguments += BranchDestino + " ";
             arguments += @"/recursive";
@@ -354,7 +357,9 @@ namespace TFS.Controladores
         private int VerificaConflitos(Merge merge)
         {
             Conflict[] listaConflitos = _ws.QueryConflicts(null, true);
-            return listaConflitos.Count();            
+            var qtdConflitos = listaConflitos.Count();
+            merge.Conflitos = qtdConflitos;
+            return qtdConflitos;
         }
 
         public Task CarregaMerges()

@@ -32,7 +32,7 @@ namespace TFS
             {
                 if (!string.IsNullOrEmpty(resultado.Item1))
                 {
-                    if (MessageBox.Show("Existem conflitos com o merge: " + resultado.Item1 + "... Pressione sim para continuar, e não para cancelar o procedimento.", "TFS", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    if (MessageBox.Show("Existem conflitos com o merge: " + resultado.Item1 + "... Pressione 'Sim' para continuar, e 'Não' para cancelar o procedimento.", "TFS", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         pnlAguarde.Mostra();
                         resultado = await _tfs.RealizaMerges();

@@ -40,6 +40,7 @@ namespace TFS
         private void CarregaComboUsuarios()
         {
             var listausuarios = _tfs.ObterDesenvolvedores();
+            cbUsuario.Items.Clear();
             cbUsuario.Items.AddRange(listausuarios);
         }
 
