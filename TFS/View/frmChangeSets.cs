@@ -194,5 +194,12 @@ namespace TFS
                 tbCaminhoTfExe.Select();
             }
         }
+
+        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            var id = dataGridView1.Rows[e.RowIndex].Cells[1].Value;
+            frmItens frmItens = new frmItens((int)id, _tfs);
+            frmItens.ShowDialog();
+        }
     }
 }

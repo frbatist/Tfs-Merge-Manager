@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -21,6 +22,7 @@ namespace TFS.Controladores
         private VersionControlServer _vcServer;
         private WorkspaceInfo _wsInfo;
         private Workspace _ws;
+        private MergeCandidate[] _candidates;
 
 
         private string _usuario;        
@@ -213,15 +215,29 @@ namespace TFS.Controladores
             return ChangeSetsCandidatos.Select(d => d.NomeUsuario).OrderBy(e => e).Distinct().ToArray();
         }
 
+        public async Task<Change[]> ObterArquivosChangeSet(int idChangeset)
+        {
+            CarregaWorkspace();
+            var changes = await Task.Run(() =>
+            {
+
+                var changeset = _vcServer.GetChangeset(idChangeset);
+                var alteracoes = changeset.Changes;
+                return alteracoes;
+            });
+
+            return changes;
+        }
+
         public async Task ObterChangeSetsCandidatos()
         {
             CarregaWorkspace();
-            var candidates = await Task.Run(() =>
+            _candidates = await Task.Run(() =>
             {                
                 return _vcServer.GetMergeCandidates(BranchOrigem, BranchDestino, RecursionType.Full);
             });
 
-            var consulta = from a in candidates
+            var consulta = from a in _candidates
                            orderby a.Changeset.CreationDate descending
                            select
                            new ChangeSet
@@ -436,6 +452,13 @@ namespace TFS.Controladores
             ChangesetsFiltrados = (from a in ChangeSetsCandidatos
                                    where selecionados.Contains(a.NomeUsuario)
                                    select a).ToList();
+        }
+
+        public void Abrir(Change change)
+        {
+            var root = _wsInfo.MappedPaths[0];
+            var caminho = change.Item.ServerItem.Replace(@"$", root).Replace("/", @"\");
+            Process.Start(caminho);
         }
     }
 }

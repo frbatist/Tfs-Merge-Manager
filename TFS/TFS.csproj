@@ -233,6 +233,12 @@
     <Compile Include="Controladores\Tfs.cs" />
     <Compile Include="Modelos\ChangeSet.cs" />
     <Compile Include="Modelos\Merge.cs" />
+    <Compile Include="View\frmItens.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmItens.Designer.cs">
+      <DependentUpon>frmItens.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmMerge.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -272,6 +278,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\frmItens.resx">
+      <DependentUpon>frmItens.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\frmMerge.resx">
       <DependentUpon>frmMerge.cs</DependentUpon>
     </EmbeddedResource>

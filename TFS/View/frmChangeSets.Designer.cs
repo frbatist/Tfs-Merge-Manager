@@ -31,12 +31,6 @@
             TFS.CheckBoxProperties checkBoxProperties1 = new TFS.CheckBoxProperties();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Selecionado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Data = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CodigoUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NomeUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Comentario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnRecarregaChangesets = new System.Windows.Forms.Button();
             this.btnMarcaTodos = new System.Windows.Forms.Button();
             this.groupConfig = new System.Windows.Forms.GroupBox();
@@ -54,6 +48,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.cbUsuario = new TFS.CheckBoxComboBox();
+            this.Selecionado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Data = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CodigoUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NomeUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Comentario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupConfig.SuspendLayout();
             this.SuspendLayout();
@@ -88,50 +88,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(954, 409);
             this.dataGridView1.TabIndex = 1;
-            // 
-            // Selecionado
-            // 
-            this.Selecionado.DataPropertyName = "Selecionado";
-            this.Selecionado.HeaderText = "Sel";
-            this.Selecionado.Name = "Selecionado";
-            this.Selecionado.Width = 60;
-            // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Id.Width = 60;
-            // 
-            // Data
-            // 
-            this.Data.DataPropertyName = "Data";
-            this.Data.HeaderText = "Data";
-            this.Data.Name = "Data";
-            this.Data.Width = 130;
-            // 
-            // CodigoUsuario
-            // 
-            this.CodigoUsuario.DataPropertyName = "CodigoUsuario";
-            this.CodigoUsuario.HeaderText = "Desenvolvedor";
-            this.CodigoUsuario.Name = "CodigoUsuario";
-            this.CodigoUsuario.Width = 130;
-            // 
-            // NomeUsuario
-            // 
-            this.NomeUsuario.DataPropertyName = "NomeUsuario";
-            this.NomeUsuario.HeaderText = "Nome";
-            this.NomeUsuario.Name = "NomeUsuario";
-            this.NomeUsuario.Width = 250;
-            // 
-            // Comentario
-            // 
-            this.Comentario.DataPropertyName = "Comentario";
-            this.Comentario.HeaderText = "Comentario";
-            this.Comentario.Name = "Comentario";
-            this.Comentario.Width = 250;
+            this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
             // 
             // btnRecarregaChangesets
             // 
@@ -304,6 +261,55 @@
             this.cbUsuario.TabIndex = 2;
             this.cbUsuario.Leave += new System.EventHandler(this.cbUsuario_Leave);
             // 
+            // Selecionado
+            // 
+            this.Selecionado.DataPropertyName = "Selecionado";
+            this.Selecionado.HeaderText = "Sel";
+            this.Selecionado.Name = "Selecionado";
+            this.Selecionado.Width = 60;
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Id.Width = 60;
+            // 
+            // Data
+            // 
+            this.Data.DataPropertyName = "Data";
+            this.Data.HeaderText = "Data";
+            this.Data.Name = "Data";
+            this.Data.ReadOnly = true;
+            this.Data.Width = 130;
+            // 
+            // CodigoUsuario
+            // 
+            this.CodigoUsuario.DataPropertyName = "CodigoUsuario";
+            this.CodigoUsuario.HeaderText = "Desenvolvedor";
+            this.CodigoUsuario.Name = "CodigoUsuario";
+            this.CodigoUsuario.ReadOnly = true;
+            this.CodigoUsuario.Width = 130;
+            // 
+            // NomeUsuario
+            // 
+            this.NomeUsuario.DataPropertyName = "NomeUsuario";
+            this.NomeUsuario.HeaderText = "Nome";
+            this.NomeUsuario.Name = "NomeUsuario";
+            this.NomeUsuario.ReadOnly = true;
+            this.NomeUsuario.Width = 250;
+            // 
+            // Comentario
+            // 
+            this.Comentario.DataPropertyName = "Comentario";
+            this.Comentario.HeaderText = "Comentario";
+            this.Comentario.Name = "Comentario";
+            this.Comentario.ReadOnly = true;
+            this.Comentario.Width = 250;
+            // 
             // frmChangeSets
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -332,12 +338,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private CheckBoxComboBox cbUsuario;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Selecionado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Data;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CodigoUsuario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NomeUsuario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Comentario;
         private System.Windows.Forms.Button btnRecarregaChangesets;
         private System.Windows.Forms.Button btnMarcaTodos;
         private System.Windows.Forms.GroupBox groupConfig;
@@ -354,6 +354,12 @@
         private System.Windows.Forms.TextBox tbBranchOrigem;
         private System.Windows.Forms.TextBox tbBranchDestino;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Selecionado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Data;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CodigoUsuario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NomeUsuario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Comentario;
     }
 }
 
